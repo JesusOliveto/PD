@@ -47,3 +47,4 @@ main = do
     numero2 <- getLine
     putStrLn "El resultado es: "
     print (add (read numero) (read numero2))
+
