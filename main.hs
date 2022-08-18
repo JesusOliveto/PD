@@ -32,3 +32,13 @@ filterPositivos xs = filter (>0) xs
 filterPositivosRec::[Integer]->[Integer]
 filterPositivosRec [] = []
 filterPositivosRec (x:xs) = if (x>0) then x:filterPositivosRec xs else filterPositivosRec xs
+
+add::Integer->Integer->Integer
+add x y = x+y
+main = do 
+    putStrLn "Ingrese un numero"
+    numero <- getLine
+    putStrLn "Ingrese otro numero"
+    numero2 <- getLine
+    putStrLn "El resultado es: "
+    print (add (read numero) (read numero2))
