@@ -48,3 +48,24 @@ main = do
     putStrLn "El resultado es: "
     print (add (read numero) (read numero2))
 
+--clase 3
+suma::[Integer]->Integer
+suma [] = 0
+suma (x:xs) = x + suma xs
+
+--quicksort 
+quicksort::[Integer]->[Integer]
+--quicksort [] = []
+quicksort (x:xs) = quicksort [y | y <- xs, y<x] ++ [x] ++ quicksort [y | y <- xs, y>=x]
+
+fibonacci::Integer->Integer
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci (n-1) + fibonacci (n-2)
+
+describeList::[Integer]->String
+describeList xs = "La lista es " ++ case xs of [] -> "vacia"
+                                               [x] -> "una lista de un solo elemento"
+                                               xs -> "una lista con " ++ show (length xs) ++ " elementos"
+
+
