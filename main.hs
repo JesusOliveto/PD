@@ -31,9 +31,6 @@ doble x=x*2
 filterPositivos::[Integer]->[Integer]
 filterPositivos xs = filter (>0) xs
 
-filterPositivosRec::[Integer]->[Integer]
-filterPositivosRec [] = []
-filterPositivosRec (x:xs) = if (x>0) then x:filterPositivosRec xs else filterPositivosRec xs
 
 --FIN EJERCITACION
 
@@ -68,4 +65,21 @@ describeList xs = "La lista es " ++ case xs of [] -> "vacia"
                                                [x] -> "una lista de un solo elemento"
                                                xs -> "una lista con " ++ show (length xs) ++ " elementos"
 
+--PRACTICO 2
+--1
+filterPositivosRec::[Integer]->[Integer]
+filterPositivosRec [] = []
+filterPositivosRec (x:xs) = if (x>0) then x:filterPositivosRec xs else filterPositivosRec xs
 
+--2
+cuadradoLista::[Integer]->[Integer]
+cuadradoLista [] = []
+cuadradoLista (x:xs) = (x*x):cuadradoLista xs
+
+cuadradoPositivos::[Integer]->[Integer]
+cuadradoPositivos [] = []
+cuadradoPositivos (x:xs) = cuadradoLista(filterPositivosRec xs)
+
+--4
+esPositivo::Integer->Bool
+esPositivo x = x>0
