@@ -109,7 +109,9 @@ ordenaFichero f1 f2 = do
     let listaOrdenada = sort lista
     writeFile f2 (unlines listaOrdenada)
     putStrLn "Fichero ordenado"
-    
 
-    
+--practico 3
+pos::String->Char->[Integer]
+pos x c = [i | (i,x) <- zip [1..] x, x==c]
+
 
