@@ -1,3 +1,5 @@
+import Data.List (sort)
+
 --clase 1
 cuadrado::Integer->Integer
 cuadrado x = x * x
@@ -83,3 +85,31 @@ cuadradoPositivos (x:xs) = cuadradoLista(filterPositivosRec xs)
 --4
 esPositivo::Integer->Bool
 esPositivo x = x>0
+
+--clase 4
+--escribir fichero fichero.txt
+escribirFichero::String->IO()
+escribirFichero x = do
+    writeFile "fichero.txt" x
+    putStrLn "Fichero escrito"
+
+
+--muestra contenido de fichero f
+muestraContenidoFichero::FilePath->IO()
+muestraContenidoFichero f = do
+    contenido <- readFile f
+    putStrLn contenido
+
+--dado un archivo, generar otro con los datos ordenados alfabéticamente
+
+ordenaFichero::FilePath->FilePath->IO()
+ordenaFichero f1 f2 = do
+    contenido <- readFile f1
+    let lista = words contenido
+    let listaOrdenada = sort lista
+    writeFile f2 (unlines listaOrdenada)
+    putStrLn "Fichero ordenado"
+    
+
+    
+
