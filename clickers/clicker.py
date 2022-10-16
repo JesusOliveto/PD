@@ -49,8 +49,8 @@ def rincrement():
     global d
     global k
     global A 
-    A= a*b*c*d+k
-    r= r + A
+    A= a*b*c*d
+    r= r + A + k
     print("r=",r)
     clock.tick(5)
 
@@ -79,11 +79,13 @@ def main_loop():
                 game_running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mopos = pygame.mouse.get_pos()
-                if mopos[0] > 0 and mopos[0] < 100 and mopos[1] > 0 and mopos[1] < 100:
+                if mopos[0] > 300 and mopos[0] < 500 and mopos[1] > 100 and mopos[1] < 200:
                     if r >= costa:
                         a=a+0.1
                         r=r-costa
                         costa=costa*1.1
+                        costa = round(costa, 0)
+                        a=round(a, 3)
         
         gameDisplay.fill(black)
         
@@ -99,18 +101,24 @@ def main_loop():
         DrawText("A= a*b*c*d"  , white, black, 100, 130, 20)
         
         #mejoras
-        DrawText("a+0.01 = " + str(costa)  , white, black, 100, 150, 20)  
-        DrawText("b+0.01 = " + str(costb)  , white, black, 100, 170, 20)
-        DrawText("c+0.01 = " + str(costc)  , white, black, 100, 190, 20)
-        DrawText("d+0.01 = " + str(costd)  , white, black, 100, 210, 20)
-        DrawText("k+1 = " + str(costk)  , white, black, 100, 230, 20)
+        DrawText("a = " + str(a)  , white, black, 100, 150, 20)  
+        DrawText("b = " + str(b)  , white, black, 100, 170, 20)
+        DrawText("c = " + str(c)  , white, black, 100, 190, 20)
+        DrawText("d = " + str(d)  , white, black, 100, 210, 20)
+        DrawText("k = " + str(k)  , white, black, 100, 230, 20)
+        DrawText("A = " + str(A)  , white, black, 100, 250, 20)
         
         #botones
         rectangle(gameDisplay, grey, 300, 100, 200, 100)
+        DrawText("a+0.1 = " + str(costa)  , white, black, 400, 150, 20)  
         rectangle(gameDisplay, grey, 300, 300, 200, 100)
+        DrawText("b+0.1 = " + str(costb)  , white, black, 400, 350, 20)
         rectangle(gameDisplay, grey, 300, 500, 200, 100)
+        DrawText("c+0.1 = " + str(costc)  , white, black, 400, 550, 20)
         rectangle(gameDisplay, grey, 600, 100, 200, 100)
+        DrawText("d+0.1 = " + str(costd)  , white, black, 700, 150, 20)
         rectangle(gameDisplay, grey, 600, 300, 200, 100)
+        DrawText("k+1 = " + str(costk)  , white, black, 700, 350, 20)
         pygame.display.update()
         clock.tick(60)
 
