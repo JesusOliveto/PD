@@ -12,10 +12,10 @@ pygame.init()
 clock = pygame.time.Clock()
 r=0.0
 A=0.0
-a=0.0
-b=0.0
-c=0.0
-d=0.0
+a=1.0
+b=1.0
+c=1.0
+d=1.0
 k=1.0
 black=(0,0,0)
 white=(255,255,255)
@@ -49,10 +49,11 @@ def rincrement():
     global d
     global k
     global A 
-    A= a*b*c*d
-    r= r + A + k
-    print("r=",r)
-    clock.tick(5)
+    A= (a*b*c*d)
+    r= (r + A + k)
+    A= round(A,5)
+    #print("r=",r)
+    clock.tick(10)
 
 
     
@@ -81,11 +82,57 @@ def main_loop():
                 mopos = pygame.mouse.get_pos()
                 if mopos[0] > 300 and mopos[0] < 500 and mopos[1] > 100 and mopos[1] < 200:
                     if r >= costa:
-                        a=a+0.1
-                        r=r-costa
-                        costa=costa*1.1
-                        costa = round(costa, 0)
-                        a=round(a, 3)
+                        #test buymax
+                        aux= r/costa
+                        aux=int(aux)
+                        r= r - costa * aux
+                        costa= costa * 1.1 * aux
+                        a= a + 0.1 * aux
+                        costa= round(costa,2)
+                        a= round(a,2)
+                        print("total a bought:",aux)
+                        
+                if mopos[0] > 300 and mopos[0] < 500 and mopos[1] > 300 and mopos[1] < 400:
+                    if r >= costb:
+                        aux= r/costb
+                        aux=int(aux)
+                        r= r - costb * aux
+                        costb= costb * 1.1 * aux
+                        b= b + 0.1 * aux
+                        costb= round(costb,2)
+                        b= round(b,2)
+                        print("total b bought:",aux)
+                if mopos[0] > 300 and mopos[0] < 500 and mopos[1] > 500 and mopos[1] < 600:
+                    if r >= costc:
+                        aux= r/costc
+                        aux=int(aux)
+                        r= r - costc * aux
+                        costc= costc * 1.1 * aux
+                        c= c + 0.1 * aux
+                        costc= round(costc,2)
+                        c= round(c,2)
+                        print("total c bought:",aux)
+                if mopos[0] > 600 and mopos[0] < 800 and mopos[1] > 100 and mopos[1] < 200:
+                    if r >= costd:
+                        aux= r/costd
+                        aux=int(aux)
+                        r= r - costd * aux
+                        costd= costd * 1.1 * aux
+                        d= d + 0.1 * aux
+                        costd= round(costd,2)
+                        d= round(d,2)
+                        print("total d bought:",aux)
+                    
+                if mopos[0] > 600 and mopos[0] < 800 and mopos[1] > 300 and mopos[1] < 400:
+                    if r >= costk:
+                        aux= r/costk
+                        aux=int(aux)
+                        r= r - costk * aux
+                        costk= costk * 1.1 * aux
+                        k= k + 1 * aux
+                        costk= round(costk,2)
+                        k= round(k,2)
+                        print("total k bought:",aux)
         
         gameDisplay.fill(black)
         
@@ -110,15 +157,20 @@ def main_loop():
         
         #botones
         rectangle(gameDisplay, grey, 300, 100, 200, 100)
-        DrawText("a+0.1 = " + str(costa)  , white, black, 400, 150, 20)  
+        DrawText("a+0.1 = " + str(costa)  , white, black, 400, 150, 20)
+        DrawText("+" + str(int(r/costa))  , white, black, 400, 170, 20) 
         rectangle(gameDisplay, grey, 300, 300, 200, 100)
         DrawText("b+0.1 = " + str(costb)  , white, black, 400, 350, 20)
+        DrawText("+" + str(int(r/costb))  , white, black, 400, 370, 20)
         rectangle(gameDisplay, grey, 300, 500, 200, 100)
         DrawText("c+0.1 = " + str(costc)  , white, black, 400, 550, 20)
+        DrawText("+" + str(int(r/costc))  , white, black, 400, 570, 20)
         rectangle(gameDisplay, grey, 600, 100, 200, 100)
         DrawText("d+0.1 = " + str(costd)  , white, black, 700, 150, 20)
+        DrawText("+" + str(int(r/costd))  , white, black, 700, 170, 20)
         rectangle(gameDisplay, grey, 600, 300, 200, 100)
         DrawText("k+1 = " + str(costk)  , white, black, 700, 350, 20)
+        DrawText("+" + str(int(r/costk))  , white, black, 700, 370, 20)
         pygame.display.update()
         clock.tick(60)
 
