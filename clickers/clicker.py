@@ -1,5 +1,3 @@
-""" crear un juego incremental con python y pygame  similar a idle spiral """
-
 #imports
 import pygame
 import time
@@ -10,6 +8,7 @@ pygame.init()
 #variables
 
 clock = pygame.time.Clock()
+deltaR = 0.0
 r=0.0
 A=0.0
 a=1.0
@@ -26,7 +25,7 @@ display_height=600
 
 #display
 gameDisplay=pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption("inserte titulo aqui")
+pygame.display.set_caption("mierder clicker v0.0.1")
 
 #funciones
 
@@ -49,11 +48,13 @@ def rincrement():
     global d
     global k
     global A 
+    global deltaR
     A= (a*b*c*d)
     r= (r + A + k)
     A= round(A,5)
     #print("r=",r)
-    clock.tick(10)
+    clock.tick(30)
+    deltaR= (A+k) *30
 
 
     
@@ -65,11 +66,11 @@ def main_loop():
     global d
     global k
     global A
-    costa=10
-    costb=50
-    costc=100
-    costd=1000
-    costk=1
+    costa=100
+    costb=500
+    costc=1000
+    costd=10000
+    costk=10
     
     game_running = True
     while game_running:
@@ -86,7 +87,7 @@ def main_loop():
                         aux= r/costa
                         aux=int(aux)
                         r= r - costa * aux
-                        costa= costa * 1.1 * aux
+                        costa= costa * 1.05 * aux
                         a= a + 0.1 * aux
                         costa= round(costa,2)
                         a= round(a,2)
@@ -107,7 +108,7 @@ def main_loop():
                         aux= r/costc
                         aux=int(aux)
                         r= r - costc * aux
-                        costc= costc * 1.1 * aux
+                        costc= costc * 1.11 * aux
                         c= c + 0.1 * aux
                         costc= round(costc,2)
                         c= round(c,2)
@@ -117,7 +118,7 @@ def main_loop():
                         aux= r/costd
                         aux=int(aux)
                         r= r - costd * aux
-                        costd= costd * 1.1 * aux
+                        costd= costd * 1.12* aux
                         d= d + 0.1 * aux
                         costd= round(costd,2)
                         d= round(d,2)
@@ -142,7 +143,8 @@ def main_loop():
             pygame.draw.line(gameDisplay, (255, 255, 255), (i, 0), (i, 900))
             
         #info
-        DrawText("r = " + str(f'{r:.2f}') , white, black, 100, 50, 20)  
+        DrawText("r = " + str(f'{r:.2f}') , white, black, 100, 50, 20) 
+        DrawText("deltaR = " + str(f'{deltaR:.2f}') , white, black, 100, 75, 20)
         rectangle(gameDisplay, grey, 0, 100, 200, 400)
         DrawText("r = A + k"  , white, black, 100, 110, 20)      
         DrawText("A= a*b*c*d"  , white, black, 100, 130, 20)
