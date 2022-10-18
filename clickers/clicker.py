@@ -26,6 +26,12 @@ data = {
     'costk': 10,
 }
 
+try:
+    with open ("savegame.txt") as save_file:
+        data=json.load(save_file)
+except:
+    print("no file created yet")
+
 global auxa
 global auxb
 global auxc
@@ -117,9 +123,13 @@ def getAuxk():
         r= r - costk
         costk= costk * 1.05
 
+def saveGame():
+    with open("savegame.txt", "w") as save_file:
+        json.dump(data, save_file)
+
+
+#MAIN LOOP
 def main_loop():
-    
-    
     game_running = True
     while game_running:
         if game_running: 
@@ -131,6 +141,7 @@ def main_loop():
             getAuxk()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                saveGame()
                 game_running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mopos = pygame.mouse.get_pos()
@@ -197,9 +208,9 @@ def main_loop():
             pygame.draw.line(gameDisplay, (255, 255, 255), (i, 0), (i, 900))
             
         #info
+        rectangle(gameDisplay, grey, 0, 0, 200, 400)
         DrawText("r = " + str(f'{data["r"]:.2f}') , white, black, 100, 50, 20) 
         DrawText("deltaR = " + str(f'{data["deltaR"]:.2f}') , white, black, 100, 75, 20)
-        rectangle(gameDisplay, grey, 0, 100, 200, 400)
         DrawText("r = A + k"  , white, black, 100, 110, 20)      
         DrawText("A= a*b*c*d"  , white, black, 100, 130, 20)
         
