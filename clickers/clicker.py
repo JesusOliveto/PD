@@ -64,55 +64,59 @@ def rincrement():
     clock.tick(30)
     data["deltaR"]= (data["A"]+data["k"]) *30
 
-def getAux():
+
+        
+def getAuxa():
     global auxa
-    global auxb
-    global auxc
-    global auxd
-    global auxk
-    
     auxa=0
-    auxb=0
-    auxc=0
-    auxd=0
-    auxk=0
-    
     r= data["r"]
     costa= data["costa"]
     while r >= costa:
         auxa= auxa + 1
         r= r - costa
         costa= costa * 1.05
-    
+
+
+def getAuxb():
+    global auxb
+    auxb=0
     r= data["r"]
     costb= data["costb"]
     while r >= costb:
-        auxa= auxa + 1
+        auxb= auxb + 1
         r= r - costb
         costb= costb * 1.05
-    
+
+def getAuxc():
+    global auxc
+    auxc=0
     r= data["r"]
     costc= data["costc"]
     while r >= costc:
-        auxa= auxa + 1
+        auxc= auxc + 1
         r= r - costc
         costc= costc * 1.05
-    
+
+def getAuxd():
+    global auxd
+    auxd=0
     r= data["r"]
     costd= data["costd"]
     while r >= costd:
-        auxa= auxa + 1
+        auxd= auxd + 1
         r= r - costd
         costd= costd * 1.05
-    
+        
+def getAuxk():
+    global auxk
+    auxk=0
     r= data["r"]
     costk= data["costk"]
     while r >= costk:
-        auxa= auxa + 1
+        auxk= auxk + 1
         r= r - costk
         costk= costk * 1.05
-    
-    
+
 def main_loop():
     
     
@@ -120,7 +124,11 @@ def main_loop():
     while game_running:
         if game_running: 
             rincrement()
-            getAux()
+            getAuxa()
+            getAuxb()
+            getAuxc()
+            getAuxd()
+            getAuxk()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_running = False
@@ -128,7 +136,6 @@ def main_loop():
                 mopos = pygame.mouse.get_pos()
                 if mopos[0] > 300 and mopos[0] < 500 and mopos[1] > 100 and mopos[1] < 200:
                     if data["r"] >= data["costa"]:
-                        #test buymax
                         global auxa
                         for i in range(auxa):
                             if data["r"] >= data["costa"]:
