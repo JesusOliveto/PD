@@ -19,6 +19,7 @@ data = {
     'c': 1.0,
     'd': 1.0,
     'k': 1.0,
+    'w': 1.0,
     'costa': 100,
     'costb': 500,
     'costc': 1000,
@@ -37,6 +38,7 @@ global auxb
 global auxc
 global auxd
 global auxk
+global auxw
 
 black=(0,0,0)
 white=(255,255,255)
@@ -64,11 +66,11 @@ def rectangle(display, color, x, y, w, h):
     
 def rincrement():
     data["A"]=(data["a"]*data["b"]*data["c"]*data["d"])
-    data["r"]= (data["r"] + data["A"] + data["k"])
+    data["r"]= (data["r"] + data["A"] *data["w"]+ data["k"])
     data["A"]= round(data["A"],5)
     #print("r=",r)
     clock.tick(30)
-    data["deltaR"]= (data["A"]+data["k"]) *30
+    data["deltaR"]= (data["A"]* data["w"] +data["k"]) *30
 
 
         
@@ -123,9 +125,29 @@ def getAuxk():
         r= r - costk
         costk= costk * 1.05
 
+def getAuxw():
+    global auxw
+    auxw= (data["a"]+data["b"]+data["c"]+data["d"])/10
+    auxw= int(auxw//1)
+
 def saveGame():
     with open("savegame.txt", "w") as save_file:
         json.dump(data, save_file)
+
+def prestige():
+    global auxw
+    data["r"]=0
+    data["a"]=1
+    data["b"]=1
+    data["c"]=1
+    data["d"]=1
+    data["k"]=1
+    data["costa"]=100
+    data["costb"]=500
+    data["costc"]=1000
+    data["costd"]=10000
+    data["costk"]=10
+    data["w"]= data["w"]+ auxw
 
 
 #MAIN LOOP
@@ -139,6 +161,7 @@ def main_loop():
             getAuxc()
             getAuxd()
             getAuxk()
+            getAuxw()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 saveGame()
@@ -199,6 +222,12 @@ def main_loop():
                                 data["costk"]= round(data["costk"],2)
                                 data["k"]= round(data["k"],2)
                         print("total k bought:",auxk)
+                if mopos[0] > 600 and mopos[0] < 800 and mopos[1] > 500 and mopos[1] < 600:
+                    if auxw >= 1:
+                        prestige()
+                        print("prestige")
+                    else:
+                        print("como vas a prestigiar con 0, so tonto vo?")
         
         gameDisplay.fill(black)
         
@@ -211,7 +240,7 @@ def main_loop():
         rectangle(gameDisplay, grey, 0, 0, 200, 400)
         DrawText("r = " + str(f'{data["r"]:.2f}') , white, black, 100, 50, 20) 
         DrawText("deltaR = " + str(f'{data["deltaR"]:.2f}') , white, black, 100, 75, 20)
-        DrawText("r = A + k"  , white, black, 100, 110, 20)      
+        DrawText("r = w*A + k"  , white, black, 100, 110, 20)      
         DrawText("A= a*b*c*d"  , white, black, 100, 130, 20)
         
         #mejoras
@@ -221,6 +250,7 @@ def main_loop():
         DrawText("d = " + str(data["d"])  , white, black, 100, 210, 20)
         DrawText("k = " + str(data["k"])  , white, black, 100, 230, 20)
         DrawText("A = " + str(data["A"])  , white, black, 100, 250, 20)
+        DrawText("w = " + str(data["w"])  , white, black, 100, 270, 20)
         
         #botones
         rectangle(gameDisplay, grey, 300, 100, 200, 100)
@@ -238,6 +268,9 @@ def main_loop():
         rectangle(gameDisplay, grey, 600, 300, 200, 100)
         DrawText("k+1 = " + str(data["costk"])  , white, black, 700, 350, 20)
         DrawText("+" + str(int(auxk))  , white, black, 700, 370, 20)
+        rectangle(gameDisplay, grey, 600, 500, 200, 100)
+        DrawText("PRESTIGE"  , white, black, 700, 550, 20)
+        DrawText("W +" + str(int(auxw))  , white, black, 700, 570, 20)
         pygame.display.update()
         clock.tick(60)
 
