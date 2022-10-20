@@ -1,1 +1,1 @@
-{"auxa": 18, "auxb": 13, "auxc": 13, "auxd": 1, "auxk": 13, "auxw": 0}
+{"auxa": 21, "auxb": 9, "auxc": 31, "auxd": 8, "auxk": 32, "auxw": 1}

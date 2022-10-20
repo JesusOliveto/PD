@@ -5,14 +5,27 @@ import data_
 pygame.init()
 
 #variables
-
+black=(0,0,0)
+white=(255,255,255)
+red=(255,0,0)
+grey=(128,128,128)
+display_width=800
+display_height=600
+gameDisplay=pygame.display.set_mode((display_width,display_height))
+pygame.display.set_caption("mierder clicker v4.20.69")
 
 
 #MAIN LOOP
 def main_loop():
     game_running = True
+    bg_img = pygame.image.load('Images/bg.jpg')
+    bg_img = pygame.transform.scale(bg_img,(800,600))
+    gameDisplay.blit(bg_img,(0,0))
+    DrawText("LOADING SAVEGAME", (255, 255, 0), (0, 0, 0), 400, 50, 50)
+    DrawText("MSK Games", (255, 10, 10), (0, 0, 0), 400, 200, 20)
+    pygame.display.update()
     loadGame()
-    time.sleep(1)
+    time.sleep(3)
     print("data_.data LOADED MAIN: ", data_.data)
     while game_running:
         if game_running:

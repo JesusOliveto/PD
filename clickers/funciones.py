@@ -18,7 +18,7 @@ display_height=600
 
 #display
 gameDisplay=pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption("mierder clicker v0.1.2")
+pygame.display.set_caption("mierder clicker v4.20.69")
 
 
 def loadGame():
