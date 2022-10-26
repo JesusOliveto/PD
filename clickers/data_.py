@@ -1,3 +1,4 @@
+#bloque de datos para hacerlos globales
 Aux = {
     'auxa' : 0.0,
     'auxb' : 0.0,
