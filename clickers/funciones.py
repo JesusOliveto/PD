@@ -47,7 +47,8 @@ def DrawText(text, Textcolor, Rectcolor, x, y, fsize):
  
 def rectangle(display, color, x, y, w, h):
     pygame.draw.rect(display, color, (x, y, w, h))
-    
+
+#bucle principal, incrementa el r    
 def rincrement():
     data_.data["A"]=(data_.data["a"]*data_.data["b"]*data_.data["c"]*data_.data["d"])
     data_.data["r"]= (data_.data["r"] + data_.data["A"] *data_.data["w"]+ data_.data["k"])
@@ -56,7 +57,7 @@ def rincrement():
     data_.data["deltaR"]= (data_.data["A"]* data_.data["w"] +data_.data["k"]) *30
 
 
-        
+#auxiliares para el calculo de los aumentos y el display        
 def getAuxa():
     data_.Aux["auxa"]=0
     r= data_.data["r"]
@@ -103,11 +104,13 @@ def getAuxk():
         r= r - costk
         costk= costk * 1.05
 
+#aux del prestigio
 def getAuxw():
     
     data_.Aux["auxw"]= (data_.data["a"]+data_.data["b"]+data_.data["c"]+data_.data["d"])/10
     data_.Aux["auxw"]= int(data_.Aux["auxw"]//1)
 
+#guardado
 def saveGame():
     try:
         with open("savegame.txt", "w") as save_file:
@@ -118,6 +121,7 @@ def saveGame():
     except:
         print("NO SE GUARDÓ CULIAOOOOOOOOOOOOOOOOOOOOOOOOOO")
 
+#prestigio, ojo que es sensible 
 def prestige():
     data_.data["r"]=0
     data_.data["a"]=1

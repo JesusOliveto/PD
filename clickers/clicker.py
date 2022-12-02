@@ -1,16 +1,17 @@
-#imports
+#imports de las funciones y del bloque de datos
 from funciones import *
 import data_
 
 pygame.init()
 
-#variables
+#variables que no uso xd
 black=(0,0,0)
 white=(255,255,255)
 red=(255,0,0)
 grey=(128,128,128)
 display_width=800
 display_height=600
+#display
 gameDisplay=pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption("mierder clicker v4.20.69")
 
@@ -18,9 +19,11 @@ pygame.display.set_caption("mierder clicker v4.20.69")
 #MAIN LOOP
 def main_loop():
     game_running = True
+    #background
     bg_img = pygame.image.load('Images/bg.jpg')
     bg_img = pygame.transform.scale(bg_img,(800,600))
     gameDisplay.blit(bg_img,(0,0))
+    #pantalla de carga
     DrawText("LOADING SAVEGAME", (255, 255, 0), (0, 0, 0), 400, 50, 50)
     DrawText("MSK Games", (255, 10, 10), (0, 0, 0), 400, 200, 20)
     pygame.display.update()
@@ -29,6 +32,7 @@ def main_loop():
     print("data_.data LOADED MAIN: ", data_.data)
     while game_running:
         if game_running:
+            #hilos paralelos
             rincrement()
             getAuxa()
             getAuxb()
@@ -38,10 +42,12 @@ def main_loop():
             getAuxw()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                #guardar el juego al cerrarlo
                 saveGame()
                 game_running = False
             #INCREMENTOS 
             if event.type == pygame.MOUSEBUTTONDOWN:
+                #checkea posiciones para generar los botones y los eventos (cambiar a funciones cuando se pueda)
                 mopos = pygame.mouse.get_pos()
                 if mopos[0] > 300 and mopos[0] < 500 and mopos[1] > 100 and mopos[1] < 200:
                     if data_.data["r"] >= data_.data["costa"]:
@@ -63,6 +69,7 @@ def main_loop():
                             data_.data["costb"]= round(data_.data["costb"],2)
                             data_.data["b"]= round(data_.data["b"],2)
                         print("total b bought:",data_.Aux["auxb"])
+                        
                 if mopos[0] > 300 and mopos[0] < 500 and mopos[1] > 500 and mopos[1] < 600:
                     if data_.data["r"] >= data_.data["costc"]:
                         for i in range(data_.Aux["auxc"]):
@@ -72,6 +79,7 @@ def main_loop():
                             data_.data["costc"]= round(data_.data["costc"],2)
                             data_.data["c"]= round(data_.data["c"],2)
                         print("total c bought:",data_.Aux["auxc"])
+                        
                 if mopos[0] > 600 and mopos[0] < 800 and mopos[1] > 100 and mopos[1] < 200:
                     if data_.data["r"] >= data_.data["costd"]:
                         for i in range(data_.Aux["auxd"]):
@@ -81,7 +89,7 @@ def main_loop():
                             data_.data["costd"]= round(data_.data["costd"],2)
                             data_.data["d"]= round(data_.data["d"],2)
                         print("total d bought:",data_.Aux["auxd"])
-                    
+                #WARNING: k incrementa de a 1, distinto que los demas, tener en cuenta para la actualizacion a funcion    
                 if mopos[0] > 600 and mopos[0] < 800 and mopos[1] > 300 and mopos[1] < 400:
                     if data_.data["r"] >= data_.data["costk"]:
                         for i in range(data_.Aux["auxk"]):
@@ -92,6 +100,7 @@ def main_loop():
                                 data_.data["costk"]= round(data_.data["costk"],2)
                                 data_.data["k"]= round(data_.data["k"],2)
                         print("total k bought:",data_.Aux["auxk"])
+                #prestigio queda asi xd         
                 if mopos[0] > 600 and mopos[0] < 800 and mopos[1] > 500 and mopos[1] < 600:
                     if data_.Aux["auxw"] >= 1:
                         prestige()
@@ -106,14 +115,14 @@ def main_loop():
             pygame.draw.line(gameDisplay, (255, 255, 255), (0, i), (900, i))
             pygame.draw.line(gameDisplay, (255, 255, 255), (i, 0), (i, 900))
             
-        #info
+        #info lateral
         rectangle(gameDisplay, grey, 0, 0, 200, 400)
         DrawText("r = " + str(f'{data_.data["r"]:.2f}') , white, black, 100, 50, 20) 
         DrawText("deltaR = " + str(f'{data_.data["deltaR"]:.2f}') , white, black, 100, 75, 20)
         DrawText("r = w*A + k"  , white, black, 100, 110, 20)      
         DrawText("A= a*b*c*d"  , white, black, 100, 130, 20)
         
-        #mejoras
+        #feedback de mejoras
         DrawText("a = " + str(data_.data["a"])  , white, black, 100, 150, 20)  
         DrawText("b = " + str(data_.data["b"])  , white, black, 100, 170, 20)
         DrawText("c = " + str(data_.data["c"])  , white, black, 100, 190, 20)
@@ -141,6 +150,8 @@ def main_loop():
         rectangle(gameDisplay, grey, 600, 500, 200, 100)
         DrawText("PRESTIGE"  , white, black, 700, 550, 20)
         DrawText("W +" + str(int(data_.Aux["auxw"]))  , white, black, 700, 570, 20)
+        
+        #display y frames
         pygame.display.update()
         clock.tick(60)
 
