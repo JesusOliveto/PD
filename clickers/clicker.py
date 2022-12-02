@@ -40,6 +40,7 @@ def main_loop():
             if event.type == pygame.QUIT:
                 saveGame()
                 game_running = False
+            #INCREMENTOS 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mopos = pygame.mouse.get_pos()
                 if mopos[0] > 300 and mopos[0] < 500 and mopos[1] > 100 and mopos[1] < 200:
