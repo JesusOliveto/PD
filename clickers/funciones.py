@@ -18,7 +18,7 @@ display_height=600
 
 #display
 gameDisplay=pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption("mierder clicker v4.20.69")
+pygame.display.set_caption("idle engine v4.20.69")
 
 
 def loadGame():
@@ -119,7 +119,7 @@ def saveGame():
             json.dump(data_.Aux, var_file)
         print("data_.data SAVED: ", data_.data)
     except:
-        print("NO SE GUARDÓ CULIAOOOOOOOOOOOOOOOOOOOOOOOOOO")
+        print("se Mbappeó el archivo pa")
 
 #prestigio, ojo que es sensible 
 def prestige():

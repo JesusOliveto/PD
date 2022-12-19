@@ -4,7 +4,7 @@ import data_
 
 pygame.init()
 
-#variables que no uso xd
+#variables
 black=(0,0,0)
 white=(255,255,255)
 red=(255,0,0)
@@ -13,7 +13,7 @@ display_width=800
 display_height=600
 #display
 gameDisplay=pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption("mierder clicker v4.20.69")
+pygame.display.set_caption("idle engine v4.20.69")
 
 
 #MAIN LOOP
@@ -99,13 +99,13 @@ def main_loop():
                                 data_.data["costk"]= round(data_.data["costk"],2)
                                 data_.data["k"]= round(data_.data["k"],2)
                         print("total k bought:",data_.Aux["auxk"])
-                #prestigio queda asi xd         
+                #prestigio          
                 if mopos[0] > 600 and mopos[0] < 800 and mopos[1] > 500 and mopos[1] < 600:
                     if data_.Aux["auxw"] >= 1:
                         prestige()
                         print("prestige")
                     else:
-                        print("como vas a prestigiar con 0, so tonto vo?")
+                        print("como vas a prestigiar con 0, so bobo vo?")
         
         gameDisplay.fill(black)
         
