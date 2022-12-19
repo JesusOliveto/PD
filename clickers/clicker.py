@@ -45,6 +45,7 @@ def main_loop():
                 #guardar el juego al cerrarlo
                 saveGame()
                 game_running = False
+            #INCREMENTOS 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 #checkea posiciones para generar los botones y los eventos (cambiar a funciones cuando se pueda)
                 mopos = pygame.mouse.get_pos()
